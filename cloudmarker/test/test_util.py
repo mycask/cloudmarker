@@ -7,15 +7,6 @@ from cloudmarker import util
 from cloudmarker.test import data_path
 
 
-class MockPlugin():
-    """A mock plugin to test plugin loading."""
-
-    def __init__(self, a=1, b=2):
-        """Mock initializer."""
-        self.a = a
-        self.b = b
-
-
 class UtilTest(unittest.TestCase):
     """Tests for util module."""
 
@@ -39,23 +30,21 @@ class UtilTest(unittest.TestCase):
 
     def test_load_plugin_without_params(self):
         plugin_config = {
-            'plugin': 'cloudmarker.test.test_util.MockPlugin'
+            'plugin': 'unittest.mock.Mock'
         }
         plugin = util.load_plugin(plugin_config)
-        self.assertIsInstance(plugin, MockPlugin)
-        self.assertEqual(plugin.a, 1)
-        self.assertEqual(plugin.b, 2)
+        self.assertIsInstance(plugin, unittest.mock.Mock)
 
     def test_load_plugin_with_params(self):
         plugin_config = {
-            'plugin': 'cloudmarker.test.test_util.MockPlugin',
+            'plugin': 'unittest.mock.Mock',
             'params': {
                 'a': 3,
                 'b': 4,
             }
         }
         plugin = util.load_plugin(plugin_config)
-        self.assertIsInstance(plugin, MockPlugin)
+        self.assertIsInstance(plugin, unittest.mock.Mock)
         self.assertEqual(plugin.a, 3)
         self.assertEqual(plugin.b, 4)
 
